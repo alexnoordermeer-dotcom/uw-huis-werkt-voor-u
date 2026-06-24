@@ -13,7 +13,6 @@ const Hero = () => {
           <div className="text-center lg:text-left animate-fade-in-up">
             {/* Badge / accent line */}
             <p className="font-accent text-2xl sm:text-3xl text-[#99248F] mb-4">
-              ✨
               Uw Huis Werkt Voor U
             </p>
 
