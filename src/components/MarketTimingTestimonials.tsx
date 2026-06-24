@@ -16,7 +16,7 @@ const STATS = [
 const TESTIMONIALS = [
   {
     quote:
-      "We waren 68 en 70 en hadden veel vragen over onze overwaarde, en eerlijk gezegd ook flink wat twijfels. Alex nam de tijd om alles rustig uit te leggen, zonder druk en zonder haast. We begrijpen nu precies wat er kan, we hoeven ons huis niet te verlaten, en we voelen ons eindelijk gerust. Aanrader voor iedereen in dezelfde situatie.",
+      "We waren 68 en 70 en hadden veel vragen over onze overwaarde, en eerlijk gezegd ook flink wat twijfels.\n\nAlex nam de tijd om alles rustig uit te leggen, zonder druk en zonder haast. We begrijpen nu precies wat er kan, we hoeven ons huis niet te verlaten, en we voelen ons eindelijk gerust.\n\nAanrader voor iedereen in dezelfde situatie.",
     author: "Myra (68) & Bram (70)",
     subtitle: "klanten van Alex Noordermeer",
     image: "/testimonial-myra-bram.jpg",
@@ -105,8 +105,8 @@ const MarketTimingTestimonials = () => {
                 </p>
 
                 {t.image && (
-                  <div className="w-20 h-20 mx-auto mb-4 relative overflow-hidden rounded-full">
-                    <img src={t.image} alt={t.author} className="w-full h-auto object-cover" style={{ marginTop: '-10px' }} />
+                  <div className="w-20 h-20 mx-auto mb-4">
+                    <img src={t.image} alt={t.author} className="w-full h-full object-cover" />
                   </div>
                 )}
 
