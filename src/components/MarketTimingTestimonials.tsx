@@ -23,7 +23,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "**Mijn pensioen zit in mijn Huis**\n\nPaul (68) werkte jarenlang als zzp’er in Amsterdam en bouwde nauwelijks pensioen op. Toen hij zijn overwaarden wilde benutten, liepen de banken niet mee. Hij zocht alternatieven, maar wilde vooral niet uit zijn huis.\n\nBij Welvarend Wonen vond hij transparante communicatie en betrouwbaarheid. Na overleg met zijn financieel adviseur en familie maakte hij de keuze. Nu ontvangt hij maandelijks een bedrag en kan hij genieten van zijn vrije tijd.\n\n**Het is financieel heel rustig. Ik kan naar mijn broer in Valencia en genieten van mijn leven.** De video \"klantervaring Paul\" is op aanvraag beschikbaar.\n\nDankzij Welvarend Wonen hoef ik mijn huis niet te verlaten om van mijn pensioen te genieten.",
+      "**Mijn pensioen zit in mijn Huis**\n\nPaul (68) werkte jarenlang als zzp’er in Amsterdam en bouwde nauwelijks pensioen op. Toen hij zijn overwaarden wilde benutten, liepen de banken niet mee. Hij zocht alternatieven, maar wilde vooral niet uit zijn huis.\n\nBij Welvarend Wonen vond hij transparante communicatie en betrouwbaarheid. Na overleg met zijn financieel adviseur en familie maakte hij de keuze. Nu ontvangt hij maandelijks een bedrag en kan hij genieten van zijn vrije tijd.\n\n**Het is financieel heel rustig. Ik kan naar mijn broer in Valencia en genieten van mijn leven.**\n\nDe video \"klantervaring Paul\" is op aanvraag beschikbaar.\n\nDankzij Welvarend Wonen hoef ik mijn huis niet te verlaten om van mijn pensioen te genieten.",
     author: "Paul Pelsser",
     subtitle: "klant via Welvarend Wonen",
     image: null,
@@ -106,7 +106,7 @@ const MarketTimingTestimonials = () => {
 
                 {t.image && (
                   <div className="w-20 h-20 mx-auto mb-4 relative overflow-hidden rounded-full">
-                    <img src={t.image} alt={t.author} className="w-full h-auto object-cover" style={{ top: '10%' }} />
+                    <img src={t.image} alt={t.author} className="w-full h-auto object-cover" style={{ marginTop: '-10px' }} />
                   </div>
                 )}
 
