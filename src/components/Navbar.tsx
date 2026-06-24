@@ -21,14 +21,9 @@ const Navbar = () => {
       {/* Desktop + Mobile Top Navbar */}
       <nav className="sticky top-0 z-50 bg-white border-b border-gray-100">
         <div className="container mx-auto flex items-center justify-between h-[72px] px-4 sm:px-6">
-          {/* Logo placeholder */}
+          {/* Logo */}
           <a href="#" className="flex items-center gap-2 shrink-0">
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: "#99248F" }}>
-              <span className="text-white font-bold text-sm">CZ</span>
-            </div>
-            <span className="font-bold text-lg text-[#4D4D4D] hidden sm:block">
-              Consumentenzaken
-            </span>
+            <img src="/logo.png" alt="Consumentenzaken Logo" className="h-8 w-auto" />
           </a>
 
           {/* Desktop nav links */}

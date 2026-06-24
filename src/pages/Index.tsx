@@ -17,6 +17,7 @@ const Index = () => {
     <div className="min-h-screen bg-white">
       <Navbar />
       <Hero />
+      <CreatorInfo />
       <ProblemFuturePacing />
       <ProductIntroParadigm />
       <FeaturesGrid />
@@ -25,7 +26,6 @@ const Index = () => {
       <ValueStack />
       <MarketTimingTestimonials />
       <PricingToegang />
-      <CreatorInfo />
       <FAQ />
       <FinalCTAFooter />
     </div>

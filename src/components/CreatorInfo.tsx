@@ -11,23 +11,11 @@ const CreatorInfo = () => {
             </h2>
           </div>
 
-          {/* Photo placeholder + text */}
+          {/* Photo + text */}
           <div className="flex flex-col sm:flex-row items-center gap-8 mb-10">
-            {/* Photo placeholder */}
-            <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl bg-[#99248F]/10 border-2 border-dashed border-[#99248F]/25 flex items-center justify-center shrink-0">
-              <svg
-                className="w-12 h-12 text-[#99248F]/30"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-                />
-              </svg>
+            {/* Photo */}
+            <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden flex items-center justify-center shrink-0">
+              <img src="/alex-noordermeer.jpg" alt="Alex Noordermeer" className="object-cover w-full h-full" />
             </div>
 
             <div className="text-center sm:text-left">
@@ -54,10 +42,13 @@ const CreatorInfo = () => {
             <p className="font-bold text-[#4D4D4D] mb-3">
               Alex Noordermeer — Consumentenzaken
             </p>
-            <p className="text-[15px] text-[#4D4D4D]/70 leading-relaxed mb-4">
-              Warmoezenierstraat 24, 3231 BR Brielle · 0181-356255
-            </p>
-            <p className="text-[13px] text-[#4D4D4D]/50 leading-relaxed">
+            <div className="text-[15px] text-[#4D4D4D]/70 leading-relaxed space-y-1">
+              <p>Warmoezenierstraat 24, 3231 BR Brielle</p>
+              <p>Mobiel: <a href="tel:+31612826368" className="hover:text-[#99248F] transition-colors">06-12826368</a></p>
+              <p>E-mail: <a href="mailto:alex@consumentenzaken.com" className="hover:text-[#99248F] transition-colors">alex@consumentenzaken.com</a></p>
+              <p>Website: <a href="https://www.consumentenzaken.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#99248F] transition-colors">www.consumentenzaken.com</a></p>
+            </div>
+            <p className="text-[13px] text-[#4D4D4D]/50 leading-relaxed mt-4">
               SEH-geregistreerd · WFT-gediplomeerd · AFM-nummer 12019426 (via VP Wonen Spijkenisse)
               · Kifid 300.013701
             </p>

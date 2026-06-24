@@ -41,11 +41,17 @@ const FinalCTAFooter = () => {
       <footer className="bg-white border-t border-gray-100">
         <div className="container mx-auto px-4 sm:px-6 py-10 sm:py-12">
           <div className="max-w-[680px] mx-auto text-center">
+            {/* Logo */}
+            <img src="/logo.png" alt="Consumentenzaken Logo" className="h-8 w-auto mx-auto mb-6" />
+
             {/* Main contact line */}
-            <p className="text-sm text-[#4D4D4D]/70 mb-6 leading-relaxed">
-              © 2026 Consumentenzaken · alex@consumentenzaken.com · 0181-356255 · Warmoezenierstraat
-              24, 3231 BR Brielle
-            </p>
+            <div className="text-sm text-[#4D4D4D]/70 mb-6 leading-relaxed space-y-1">
+              <p>© 2026 Consumentenzaken</p>
+              <p>Warmoezenierstraat 24, 3231 BR Brielle</p>
+              <p>Mobiel: <a href="tel:+31612826368" className="hover:text-[#99248F] transition-colors">06-12826368</a></p>
+              <p>E-mail: <a href="mailto:alex@consumentenzaken.com" className="hover:text-[#99248F] transition-colors">alex@consumentenzaken.com</a></p>
+              <p>Website: <a href="https://www.consumentenzaken.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#99248F] transition-colors">www.consumentenzaken.com</a></p>
+            </div>
 
             {/* Policy links */}
             <p className="text-sm text-[#4D4D4D]/70 mb-4">
