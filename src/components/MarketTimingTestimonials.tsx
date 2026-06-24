@@ -105,8 +105,8 @@ const MarketTimingTestimonials = () => {
                 </p>
 
                 {t.image && (
-                  <div className="w-24 h-24 mx-auto mb-4 overflow-hidden">
-                    <img src={t.image} alt={t.author} className="w-full h-full object-cover" style={{ marginTop: '10px' }} />
+                  <div className="w-32 h-32 mx-auto mb-4 relative overflow-hidden">
+                    <img src={t.image} alt={t.author} className="absolute w-full h-auto object-cover" style={{ transform: 'translateY(10%)' }} />
                   </div>
                 )}
 
