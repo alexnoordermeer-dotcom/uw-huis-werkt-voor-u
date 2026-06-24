@@ -15,7 +15,7 @@ const CreatorInfo = () => {
           <div className="flex flex-col sm:flex-row items-center gap-8 mb-10">
             {/* Photo */}
             <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden flex items-center justify-center shrink-0">
-              <img src="/alex-noordermeer.jpg" alt="Alex Noordermeer" className="object-cover w-full h-full" />
+              <img src="/alex-noordermeer.jpg" alt="Alex Noordermeer" className="object-cover w-full h-full object-top" />
             </div>
 
             <div className="text-center sm:text-left">
