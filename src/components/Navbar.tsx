@@ -23,7 +23,7 @@ const Navbar = () => {
         <div className="container mx-auto flex items-center justify-between h-[72px] px-4 sm:px-6">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 shrink-0">
-            <img src="/logo.png" alt="Consumentenzaken Logo" className="h-12 w-auto" />
+            <img src="/logo.png" alt="Consumentenzaken Logo" style={{ height: '48px', width: 'auto' }} />
           </a>
 
           {/* Desktop nav links */}
