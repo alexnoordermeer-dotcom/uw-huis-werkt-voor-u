@@ -30,7 +30,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "We wilden blijven waar we gelukkig zijn en dat kan nu, met financiële ruimte én rust.",
+      "**Extra genieten van het leven**\n\nBerry (73) en Anny (71) zijn echte levensgenieters. Ze wilden meer uit het leven halen zonder hun geliefde appartement te verlaten. Hun vermogen zat vast in het huis, maar ze droomden van meer vakanties, huisjes en tijd met hun kinderen en kleinkinderen.\n\nSamen met hun kinderen namen ze de tijd om alles te begrijpen. De persoonlijke benadering en openheid gaf vertrouwen. Nu hebben ze de financiële ruimte om te genieten, precies zoals ze het voor zich zagen.\n\n**Je wordt nergens in gepusht. Het proces gaat in jouw tempo. Dat gaf vertrouwen.**\n\nDe video \"klantervaring Berry en Anny\" is op aanvraag beschikbaar.",
     author: "Anny & Berry van Gool",
     subtitle: "klanten via Welvarend Wonen",
     image: null,
@@ -105,8 +105,8 @@ const MarketTimingTestimonials = () => {
                 </p>
 
                 {t.image && (
-                  <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4 relative">
-                    <img src={t.image} alt={t.author} className="absolute w-full h-auto" style={{ top: '10%' }} />
+                  <div className="w-20 h-20 mx-auto mb-4 relative overflow-hidden rounded-full">
+                    <img src={t.image} alt={t.author} className="w-full h-auto object-cover" style={{ top: '10%' }} />
                   </div>
                 )}
 
