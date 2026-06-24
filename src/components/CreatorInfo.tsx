@@ -45,6 +45,7 @@ const CreatorInfo = () => {
             </p>
             <div className="text-[15px] text-[#4D4D4D]/70 leading-relaxed space-y-1">
               <p>Warmoezenierstraat 24, 3231 BR Brielle</p>
+              <p>Vast: <a href="tel:+31181356255" className="hover:text-[#99248F] transition-colors">0181-356255</a></p>
               <p>Mobiel: <a href="tel:+31612826368" className="hover:text-[#99248F] transition-colors">06-12826368</a></p>
               <p>E-mail: <a href="mailto:alex@consumentenzaken.com" className="hover:text-[#99248F] transition-colors">alex@consumentenzaken.com</a></p>
               <p>Website: <a href="https://www.consumentenzaken.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#99248F] transition-colors">www.consumentenzaken.com</a></p>
