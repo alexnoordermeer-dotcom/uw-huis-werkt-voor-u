@@ -23,7 +23,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "Mijn pensioen zit in mijn Huis\"         Paul (68) werkte jarenlang als zzp’er in Amsterdam en bouwde nauwelijks pensioen op.  Toen hij zijn overwaarden wilde benutten, liepen de banken niet mee. Hij zocht alternatieven, maar wilde vooral niet uit zijn huis.          Bij Welvarend Wonen vond hij transparante communicatie en betrouwbaarheid. Na overleg met zijn financieel adviseur en familie maakte hij de keuze. Nu ontvangt hij maandelijks een bedrag en kan hij genieten van zijn vrije tijd.        \"Het is financieel heel rustig. Ik kan naar mijn broer in Valencia en genieten van mijn leven.\"  De video \"klantervaring Paul\" is op aanvraag beschikbaar.\n\nDankzij Welvarend Wonen hoef ik mijn huis niet te verlaten om van mijn pensioen te genieten.",
+      "**Mijn pensioen zit in mijn Huis**\n\nPaul (68) werkte jarenlang als zzp’er in Amsterdam en bouwde nauwelijks pensioen op. Toen hij zijn overwaarden wilde benutten, liepen de banken niet mee. Hij zocht alternatieven, maar wilde vooral niet uit zijn huis.\n\nBij Welvarend Wonen vond hij transparante communicatie en betrouwbaarheid. Na overleg met zijn financieel adviseur en familie maakte hij de keuze. Nu ontvangt hij maandelijks een bedrag en kan hij genieten van zijn vrije tijd.\n\n**Het is financieel heel rustig. Ik kan naar mijn broer in Valencia en genieten van mijn leven.** De video \"klantervaring Paul\" is op aanvraag beschikbaar.\n\nDankzij Welvarend Wonen hoef ik mijn huis niet te verlaten om van mijn pensioen te genieten.",
     author: "Paul Pelsser",
     subtitle: "klant via Welvarend Wonen",
     image: null,
@@ -100,13 +100,13 @@ const MarketTimingTestimonials = () => {
                   <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                 </svg>
 
-                <p className="text-[15px] text-[#4D4D4D] leading-relaxed flex-1 mb-5">
+                <p className="text-[15px] text-[#4D4D4D] leading-relaxed flex-1 mb-5 whitespace-pre-line">
                   "{t.quote}"
                 </p>
 
                 {t.image && (
                   <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4">
-                    <img src={t.image} alt={t.author} className="object-cover w-full h-full" />
+                    <img src={t.image} alt={t.author} className="object-cover w-full h-full object-[center_20%]" />
                   </div>
                 )}
 
