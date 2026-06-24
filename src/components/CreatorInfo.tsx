@@ -39,7 +39,8 @@ const CreatorInfo = () => {
 
           {/* Credentials card */}
           <div className="bg-white rounded-2xl border border-gray-100 p-6 sm:p-8">
-            <p className="font-bold text-[#4D4D4D] mb-3">
+            <p className="font-bold text-[#4D4D4D] mb-3 flex items-center justify-center sm:justify-start gap-2">
+              <img src="/logo.png" alt="Consumentenzaken Logo" className="h-6 w-auto" />
               Alex Noordermeer — Consumentenzaken
             </p>
             <div className="text-[15px] text-[#4D4D4D]/70 leading-relaxed space-y-1">
