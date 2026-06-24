@@ -19,18 +19,21 @@ const TESTIMONIALS = [
       "We waren 68 en 70 en hadden veel vragen over onze overwaarde, en eerlijk gezegd ook flink wat twijfels. Alex nam de tijd om alles rustig uit te leggen, zonder druk en zonder haast. We begrijpen nu precies wat er kan, we hoeven ons huis niet te verlaten, en we voelen ons eindelijk gerust. Aanrader voor iedereen in dezelfde situatie.",
     author: "Myra (68) & Bram (70)",
     subtitle: "klanten van Alex Noordermeer",
+    image: "/testimonial-myra-bram.jpg",
   },
   {
     quote:
-      "Dankzij Welvarend Wonen hoef ik mijn huis niet te verlaten om van mijn pensioen te genieten.",
+      "Mijn pensioen zit in mijn Huis\"         Paul (68) werkte jarenlang als zzp’er in Amsterdam en bouwde nauwelijks pensioen op.  Toen hij zijn overwaarden wilde benutten, liepen de banken niet mee. Hij zocht alternatieven, maar wilde vooral niet uit zijn huis.          Bij Welvarend Wonen vond hij transparante communicatie en betrouwbaarheid. Na overleg met zijn financieel adviseur en familie maakte hij de keuze. Nu ontvangt hij maandelijks een bedrag en kan hij genieten van zijn vrije tijd.        \"Het is financieel heel rustig. Ik kan naar mijn broer in Valencia en genieten van mijn leven.\"  De video \"klantervaring Paul\" is op aanvraag beschikbaar.\n\nDankzij Welvarend Wonen hoef ik mijn huis niet te verlaten om van mijn pensioen te genieten.",
     author: "Paul Pelsser",
     subtitle: "klant via Welvarend Wonen",
+    image: null,
   },
   {
     quote:
       "We wilden blijven waar we gelukkig zijn en dat kan nu, met financiële ruimte én rust.",
     author: "Anny & Berry van Gool",
     subtitle: "klanten via Welvarend Wonen",
+    image: null,
   },
 ];
 
@@ -101,7 +104,13 @@ const MarketTimingTestimonials = () => {
                   "{t.quote}"
                 </p>
 
-                <div className="border-t border-gray-100 pt-4">
+                {t.image && (
+                  <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4">
+                    <img src={t.image} alt={t.author} className="object-cover w-full h-full" />
+                  </div>
+                )}
+
+                <div className="border-t border-gray-100 pt-4 text-center">
                   <p className="font-bold text-[#4D4D4D] text-sm">{t.author}</p>
                   <p className="text-xs text-[#4D4D4D]/60 mt-0.5">{t.subtitle}</p>
                 </div>
