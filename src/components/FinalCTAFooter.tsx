@@ -60,7 +60,7 @@ const FinalCTAFooter = () => {
                 Privacyverklaring
               </a>
               {" · "}
-              <a href="#" className="hover:text-[#99248F] transition-colors underline underline-offset-2">
+              <a href="/algemene-voorwaarden.html" target="_blank" rel="noopener noreferrer" className="hover:text-[#99248F] transition-colors underline underline-offset-2">
                 Algemene voorwaarden
               </a>
             </p>

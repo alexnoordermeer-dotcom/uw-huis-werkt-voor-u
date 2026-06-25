@@ -3,6 +3,14 @@
   "name": "uw-huis-werkt-voor-u",
   "rewrites": [
     {
+      "source": "/algemene-voorwaarden.html",
+      "destination": "/algemene-voorwaarden.html"
+    },
+    {
+      "source": "/algemene-voorwaarden.docx",
+      "destination": "/algemene-voorwaarden.docx"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
