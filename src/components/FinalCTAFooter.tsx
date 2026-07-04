@@ -34,7 +34,7 @@ const FinalCTAFooter = () => {
         <div className="container mx-auto px-4 sm:px-6 py-10 sm:py-12">
           <div className="max-w-[680px] mx-auto text-center">
             {/* Logo */}
-            <img src="/logo.png" alt="Consumentenzaken Logo" style={{ height: '64px', width: 'auto' }} className="mx-auto mb-6" />
+            <img src="/400dpiLogo.png" alt="Consumentenzaken Logo" style={{ height: '96px', width: 'auto' }} className="mx-auto mb-6" />
 
             {/* Main contact line */}
             <div className="text-sm text-[#4D4D4D]/70 mb-6 leading-relaxed space-y-1">
