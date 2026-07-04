@@ -32,7 +32,7 @@ const Navbar = () => {
               </a>
             ))}
             <a
-              href="/REKENT1.HTM"
+              href="/REKENT1.HTM" target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-bold text-white rounded-lg transition-colors duration-200"
               style={{ backgroundColor: "#99248F" }}
               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#7A1B72")}
@@ -67,7 +67,7 @@ const Navbar = () => {
                 </a>
               ))}
               <a
-                href="/REKENT1.HTM"
+                href="/REKENT1.HTM" target="_blank" rel="noopener noreferrer"
                 onClick={() => setMobileOpen(false)}
                 className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-bold text-white rounded-lg transition-colors duration-200 mt-1"
                 style={{ backgroundColor: "#99248F" }}
@@ -82,7 +82,7 @@ const Navbar = () => {
       {/* Mobile sticky bottom CTA bar */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-100 px-4 py-3 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
         <a
-          href="/REKENT1.HTM"
+          href="/REKENT1.HTM" target="_blank" rel="noopener noreferrer"
           className="flex items-center justify-center w-full px-6 py-3 text-base font-bold text-white rounded-lg transition-colors duration-200"
           style={{ backgroundColor: "#99248F" }}
           onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#7A1B72")}

@@ -48,7 +48,7 @@ const PricingToegang = () => {
 
           {/* CTA */}
           <a
-            href="/REKENT1.HTM"
+            href="/REKENT1.HTM" target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-10 py-4 text-xl sm:text-2xl font-bold text-white rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
             style={{ backgroundColor: "#99248F" }}
             onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#7A1B72")}
