@@ -1,11 +1,4 @@
 const FinalCTAFooter = () => {
-  const scrollToCheckout = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    // ⚠️ Vervang dit met je echte checkout/opt-in URL voor publicatie
-    const el = document.getElementById("toegang");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <>
       {/* Final CTA */}
@@ -20,8 +13,7 @@ const FinalCTAFooter = () => {
             </h2>
 
             <a
-              href="#toegang"
-              onClick={scrollToCheckout}
+              href="/REKENT1.HTM"
               className="inline-flex items-center justify-center px-10 py-4 text-xl sm:text-2xl font-bold text-white rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
               style={{ backgroundColor: "#99248F" }}
               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#7A1B72")}
@@ -42,7 +34,7 @@ const FinalCTAFooter = () => {
         <div className="container mx-auto px-4 sm:px-6 py-10 sm:py-12">
           <div className="max-w-[680px] mx-auto text-center">
             {/* Logo */}
-            <img src="/logo.png" alt="Consumentenzaken Logo" style={{ height: '48px', width: 'auto' }} className="mx-auto mb-6" />
+            <img src="/logo.png" alt="Consumentenzaken Logo" style={{ height: '64px', width: 'auto' }} className="mx-auto mb-6" />
 
             {/* Main contact line */}
             <div className="text-sm text-[#4D4D4D]/70 mb-6 leading-relaxed space-y-1">

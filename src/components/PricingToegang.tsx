@@ -7,13 +7,6 @@ const BENEFITS = [
 ];
 
 const PricingToegang = () => {
-  const scrollToCheckout = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    // ⚠️ Vervang dit met je echte checkout/opt-in URL voor publicatie
-    const el = document.getElementById("toegang");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <section id="toegang" className="bg-white scroll-mt-[72px]">
       <div className="container mx-auto px-4 sm:px-6 pt-16 sm:pt-20 lg:pt-28 pb-16 sm:pb-24">
@@ -55,8 +48,7 @@ const PricingToegang = () => {
 
           {/* CTA */}
           <a
-            href="#toegang"
-            onClick={scrollToCheckout}
+            href="/REKENT1.HTM"
             className="inline-flex items-center justify-center px-10 py-4 text-xl sm:text-2xl font-bold text-white rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
             style={{ backgroundColor: "#99248F" }}
             onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#7A1B72")}

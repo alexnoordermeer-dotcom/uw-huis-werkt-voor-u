@@ -10,12 +10,6 @@ const NAV_LINKS = [
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const scrollToToegang = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const el = document.getElementById("toegang");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <>
       {/* Desktop + Mobile Top Navbar */}
@@ -23,7 +17,7 @@ const Navbar = () => {
         <div className="container mx-auto flex items-center justify-between h-[72px] px-4 sm:px-6">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 shrink-0">
-            <img src="/logo.png" alt="Consumentenzaken Logo" style={{ height: '48px', width: 'auto' }} />
+            <img src="/logo.png" alt="Consumentenzaken Logo" style={{ height: '64px', width: 'auto' }} />
           </a>
 
           {/* Desktop nav links */}
@@ -38,8 +32,7 @@ const Navbar = () => {
               </a>
             ))}
             <a
-              href="#toegang"
-              onClick={scrollToToegang}
+              href="/REKENT1.HTM"
               className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-bold text-white rounded-lg transition-colors duration-200"
               style={{ backgroundColor: "#99248F" }}
               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#7A1B72")}
@@ -74,11 +67,8 @@ const Navbar = () => {
                 </a>
               ))}
               <a
-                href="#toegang"
-                onClick={(e) => {
-                  setMobileOpen(false);
-                  scrollToToegang(e);
-                }}
+                href="/REKENT1.HTM"
+                onClick={() => setMobileOpen(false)}
                 className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-bold text-white rounded-lg transition-colors duration-200 mt-1"
                 style={{ backgroundColor: "#99248F" }}
               >
@@ -92,8 +82,7 @@ const Navbar = () => {
       {/* Mobile sticky bottom CTA bar */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-100 px-4 py-3 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
         <a
-          href="#toegang"
-          onClick={scrollToToegang}
+          href="/REKENT1.HTM"
           className="flex items-center justify-center w-full px-6 py-3 text-base font-bold text-white rounded-lg transition-colors duration-200"
           style={{ backgroundColor: "#99248F" }}
           onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#7A1B72")}
