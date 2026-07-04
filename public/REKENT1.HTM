@@ -86,7 +86,21 @@
       font-size: 18px; color: #666; pointer-events: none;
     }
     .euro-wrap input { padding-left: 36px; }
-    #geboortedatum { font-size: 22px; padding: 18px 20px; }
+    #geboortedatum { font-size: 22px; padding: 18px 20px; color: #333; }
+    #geboortedatum::selection { background: transparent; }
+    #geboortedatum::-webkit-datetime-edit-fields-wrapper { background: transparent; }
+    #geboortedatum::-webkit-datetime-edit-text,
+    #geboortedatum::-webkit-datetime-edit-month-field,
+    #geboortedatum::-webkit-datetime-edit-day-field,
+    #geboortedatum::-webkit-datetime-edit-year-field {
+      color: #333;
+    }
+    #geboortedatum::-webkit-datetime-edit-month-field:focus,
+    #geboortedatum::-webkit-datetime-edit-day-field:focus,
+    #geboortedatum::-webkit-datetime-edit-year-field:focus {
+      color: #333;
+      background: transparent;
+    }
 
     /* ── RADIO OPTIONS ── */
     .options { display: flex; flex-direction: column; gap: 12px; margin-bottom: 8px; }
