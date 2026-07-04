@@ -46,6 +46,9 @@ const Hero = () => {
                 alt="Persoonlijk Overzicht"
                 className="w-full h-auto rounded-2xl shadow-lg"
               />
+              <span className="absolute top-3 right-3 bg-[#99248F] text-white text-xs font-semibold px-3 py-1 rounded-full shadow">
+                Indicatief
+              </span>
             </div>
           </div>
         </div>
