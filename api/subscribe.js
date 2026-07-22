@@ -8,7 +8,7 @@
  */
 
 // ── EmailOctopus API v2 ──────────────────────────────────────────
-const EMAILOCTOPUS_API = "https://emailoctopus.com/api/2.0";
+const EMAILOCTOPUS_API = "https://emailoctopus.com/api/1.6";
 
 async function addContact(apiKey, listId, contact) {
   const url = `${EMAILOCTOPUS_API}/lists/${listId}/contacts`;
