@@ -11,10 +11,9 @@
 const EMAILOCTOPUS_API = "https://emailoctopus.com/api/1.6";
 
 async function addContact(apiKey, listId, contact) {
-  const url = `${EMAILOCTOPUS_API}/lists/${listId}/contacts`;
+  const url = `${EMAILOCTOPUS_API}/lists/${listId}/contacts?api_key=${encodeURIComponent(apiKey)}`;
 
   const body = {
-    api_key: apiKey,
     email_address: contact.email_address,
     fields: contact.fields || {},
     tags: contact.tags || [],
