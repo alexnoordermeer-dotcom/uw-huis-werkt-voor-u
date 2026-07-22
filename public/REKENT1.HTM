@@ -965,33 +965,35 @@
   }
 
   function stuurLead(r) {
-    var FORM_URL = 'https://formspree.io/f/JOUW_FORMSPREE_ID';
+    // Splits naam in voornaam en achternaam (laatste woord = achternaam)
+    var naamDelen = (data.naam || '').trim().split(/\s+/);
+    var voornaam = naamDelen.slice(0, -1).join(' ') || naamDelen[0] || '';
+    var achternaam = naamDelen.length > 1 ? naamDelen[naamDelen.length - 1] : '';
 
     var body = {
-      naam: data.naam,
       email: data.email,
-      telefoon: data.telefoon,
-      woningwaarde: data.woningwaarde,
-      hypotheek: data.hypotheek,
-      leeftijd: data.leeftijd,
-      partner: data.partner,
-      looptijd: data.looptijd,
-      erfenis: data.erfenis,
-      eenmaligBedrag: data.eenmaligBedrag,
-      maandbedrag_indicatief: Math.round(r.maandbedrag),
-      jaarbedrag_indicatief: Math.round(r.jaarbedrag),
-      uitkeringspercentage: r.basePct,
-      effectief_percentage: r.effectiefPct,
-      totaal_uitgekeerd: Math.round(r.totaalUitgekeerd)
+      phone: data.telefoon,
+      fields: {
+        FirstName: voornaam,
+        LastName: achternaam,
+        Woningwaarde: String(data.woningwaarde || ''),
+        OpenstaandeHypotheek: String(data.hypotheek || 0),
+        GeboortedatumJongsteBewoner: data.geboortedatum ? data.geboortedatum.toISOString().split('T')[0] : '',
+        PartnerInwonend: data.partner || '',
+        IndicatiefMaandbedrag: String(Math.round(r.maandbedrag)),
+        VoorschotBedrag: String(data.eenmaligBedrag || 0)
+      }
     };
 
-    if (FORM_URL.indexOf('JOUW_FORMSPREE_ID') === -1) {
-      fetch(FORM_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(body)
-      }).catch(function() {});
-    }
+    fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    }).then(function(resp) {
+      console.log('Lead verstuurd:', resp.status);
+    }).catch(function(err) {
+      console.error('Lead mislukt:', err);
+    });
   }
 
   // Default looptijd = 100
