@@ -1,6 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-    "rewrites": [
+  "name": "uw-huis-werkt-voor-u",
+  "rewrites": [
     {
       "source": "/algemene-voorwaarden.html",
       "destination": "/algemene-voorwaarden.html"

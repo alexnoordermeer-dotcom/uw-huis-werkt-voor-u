@@ -965,34 +965,33 @@
   }
 
   function stuurLead(r) {
-    // Splits naam in voornaam en achternaam (laatste woord = achternaam)
-    var naamDelen = (data.naam || '').trim().split(/\s+/);
-    var voornaam = naamDelen.slice(0, -1).join(' ') || naamDelen[0] || '';
-    var achternaam = naamDelen.length > 1 ? naamDelen[naamDelen.length - 1] : '';
+    // Verstuur lead naar EmailOctopus via Vercel serverless functie
+    var API_URL = '/api/subscribe';
 
     var body = {
+      naam: data.naam,
       email: data.email,
-      phone: data.telefoon,
-      fields: {
-        FirstName: voornaam,
-        LastName: achternaam,
-        Woningwaarde: String(data.woningwaarde || ''),
-        OpenstaandeHypotheek: String(data.hypotheek || 0),
-        GeboortedatumJongsteBewoner: data.geboortedatum ? data.geboortedatum.toISOString().split('T')[0] : '',
-        PartnerInwonend: data.partner || '',
-        IndicatiefMaandbedrag: String(Math.round(r.maandbedrag)),
-        VoorschotBedrag: String(data.eenmaligBedrag || 0)
-      }
+      telefoon: data.telefoon,
+      woningwaarde: data.woningwaarde,
+      hypotheek: data.hypotheek,
+      geboortedatum: data.geboortedatum ? data.geboortedatum.toISOString().split('T')[0] : '',
+      partner: data.partner,
+      eenmaligBedrag: data.eenmaligBedrag,
+      maandbedrag_indicatief: Math.round(r.maandbedrag)
     };
 
-    fetch('/api/subscribe', {
+    fetch(API_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(body)
-    }).then(function(resp) {
-      console.log('Lead verstuurd:', resp.status);
+    }).then(function(response) {
+      if (!response.ok) {
+        console.error('EmailOctopus API fout:', response.status);
+      } else {
+        console.log('✅ Lead succesvol verstuurd naar EmailOctopus');
+      }
     }).catch(function(err) {
-      console.error('Lead mislukt:', err);
+      console.error('❌ Kon lead niet versturen:', err);
     });
   }
 

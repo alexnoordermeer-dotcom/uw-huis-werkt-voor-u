@@ -1,85 +1,97 @@
-// api/subscribe.js
-// Vercel serverless functie: stuurt een nieuwe lead naar EmailOctopus (API v2).
+/**
+ * Vercel Serverless Function — EmailOctopus v2 API
+ * Endpoint: POST /api/subscribe
+ *
+ * Ontvangt formulierdata van REKENT1.HTM en schrijft de lead weg
+ * naar een EmailOctopus-lijst. De API-sleutel en het list-ID blijven
+ * op de server — die komen nooit in de browser terecht.
+ */
 
-const API_KEY = process.env.EMAILOCTOPUS_API_KEY;
-const LIST_ID = process.env.EMAILOCTOPUS_LIST_ID;
+// ── EmailOctopus API v2 ──────────────────────────────────────────
+const EMAILOCTOPUS_API = "https://emailoctopus.com/api/2.0";
 
-module.exports = async (req, res) => {
-  // CORS
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+async function addContact(apiKey, listId, contact) {
+  const url = `${EMAILOCTOPUS_API}/lists/${listId}/contacts`;
 
-  if (req.method === "OPTIONS") {
-    res.status(200).end();
-    return;
+  const body = {
+    api_key: apiKey,
+    email_address: contact.email_address,
+    fields: contact.fields || {},
+    tags: contact.tags || [],
+    status: "SUBSCRIBED",  // single opt-in: direct actief
+  };
+
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    const msg =
+      data?.error?.message ||
+      data?.message ||
+      `EmailOctopus returned ${res.status}`;
+    throw new Error(msg);
   }
 
+  return data;
+}
+
+// ── Vercel handler ────────────────────────────────────────────────
+export default async function handler(req, res) {
+  // Alleen POST toestaan
   if (req.method !== "POST") {
-    res.status(405).json({ error: "Method not allowed" });
-    return;
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
-  if (!API_KEY || !LIST_ID) {
-    console.error("EMAILOCTOPUS_API_KEY of EMAILOCTOPUS_LIST_ID ontbreekt");
-    res.status(500).json({ error: "Server configuratiefout" });
-    return;
+  // Lees de secrets uit omgevingsvariabelen (Vercel dashboard)
+  const apiKey = process.env.EMAILOCTOPUS_API_KEY;
+  const listId = process.env.EMAILOCTOPUS_LIST_ID;
+
+  if (!apiKey || !listId) {
+    console.error("Missing EMAILOCTOPUS_API_KEY or EMAILOCTOPUS_LIST_ID");
+    return res.status(500).json({ error: "Server configuration error" });
   }
 
   try {
-    const body =
-      typeof req.body === "string" ? JSON.parse(req.body) : req.body || {};
-    const { email, name, phone, fields = {} } = body;
+    const { naam, email, telefoon, woningwaarde, hypotheek, geboortedatum,
+            partner, eenmaligBedrag,
+            maandbedrag_indicatief } = req.body;
 
+    // E-mail is verplicht voor EmailOctopus
     if (!email) {
-      res.status(400).json({ error: "E-mailadres ontbreekt" });
-      return;
+      return res.status(400).json({ error: "E-mailadres is verplicht" });
     }
 
-    // Email Octopus system fields + custom fields
-    var eoFields = {};
-    if (fields) {
-      Object.keys(fields).forEach(function(k) {
-        eoFields[k] = fields[k];
-      });
-    }
-    if (phone) eoFields["Telefoon"] = phone;
+    // Splits volledige naam in voor- en achternaam
+    const naamParts = (naam || "").trim().split(/\s+/);
+    const firstName = naamParts[0] || "";
+    const lastName = naamParts.slice(1).join(" ") || "";
 
-    const response = await fetch(
-      `https://api.emailoctopus.com/lists/${LIST_ID}/contacts`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${API_KEY}`,
-        },
-        body: JSON.stringify({
-          email_address: email,
-          fields: eoFields,
-          status: "subscribed",
-        }),
-      }
-    );
+    const contact = {
+      email_address: email,
+      fields: {
+        FirstName: firstName,
+        LastName: lastName,
+        Telefoon: telefoon || "",
+        IndicatiefMaandbedrag: maandbedrag_indicatief != null ? String(maandbedrag_indicatief) : "",
+        Woningwaarde: woningwaarde != null ? String(woningwaarde) : "",
+        GeboortedatumJongsteBewoner: geboortedatum || "",
+        OpenstaandeHypotheek: hypotheek != null ? String(hypotheek) : "",
+        PartnerInwonend: partner || "",
+        VoorschotBedrag: eenmaligBedrag != null ? String(eenmaligBedrag) : "",
+      },
+      tags: ["Rekentool"],
+    };
 
-    if (response.ok) {
-      res.status(200).json({ ok: true });
-      return;
-    }
-
-    const data = await response.json().catch(() => ({}));
-
-    const alreadyExists =
-      response.status === 409 ||
-      (data.errors || []).some((e) =>
-        (e.detail || "").toLowerCase().includes("already exists")
-      );
-    if (alreadyExists) {
-      res.status(200).json({ ok: true, note: "bestond al" });
-      return;
-    }
-
-    res.status(502).json({ error: "EmailOctopus weigerde", detail: data });
+    const result = await addContact(apiKey, listId, contact);
+    console.log("✅ Contact toegevoegd aan EmailOctopus:", result.id);
+    return res.status(200).json({ ok: true, id: result.id });
   } catch (err) {
-    res.status(500).json({ error: "Serverfout", detail: String(err) });
+    console.error("❌ EmailOctopus fout:", err.message);
+    return res.status(502).json({ error: err.message });
   }
-};
+}
