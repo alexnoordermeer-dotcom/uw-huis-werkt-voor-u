@@ -10,6 +10,10 @@
       "destination": "/algemene-voorwaarden.docx"
     },
     {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

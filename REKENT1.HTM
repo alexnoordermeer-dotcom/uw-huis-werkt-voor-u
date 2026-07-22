@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uw Huis Werkt Voor U — Doe de gratis berekening</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #F4F4F4;
+      color: #333;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      background: #fff;
+      border-bottom: 3px solid #99248F;
+      padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { height: 80px; }
+    .nav-contact { font-size: 15px; color: #666; }
+    .nav-contact a { color: #99248F; text-decoration: none; font-weight: 600; }
+
+    /* ── WRAPPER ── */
+    .page-wrap {
+      max-width: 640px;
+      margin: 40px auto;
+      padding: 0 20px 80px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      padding: 40px 36px;
+    }
+    @media (max-width: 600px) {
+      .card { padding: 28px 20px; }
+    }
+
+    /* ── PROGRESS ── */
+    .progress-wrap { margin-bottom: 28px; }
+    .progress-label { font-size: 14px; color: #888; margin-bottom: 6px; }
+    .progress-bar { background: #eee; border-radius: 99px; height: 8px; }
+    .progress-fill {
+      background: #99248F;
+      border-radius: 99px; height: 8px;
+      transition: width 0.4s ease;
+    }
+
+    /* ── STEP HEADER ── */
+    .step-tag {
+      font-size: 13px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: #99248F; margin-bottom: 8px;
+    }
+    h1 { font-size: 26px; color: #1a1a1a; margin-bottom: 8px; line-height: 1.3; }
+    .step-sub { font-size: 16px; color: #666; margin-bottom: 28px; }
+
+    /* ── FORM ELEMENTS ── */
+    label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 17px; }
+    input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="date"] {
+      width: 100%;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: 18px;
+      color: #333;
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 4px;
+    }
+    input:focus { border-color: #99248F; color: #333; background: #fff; }
+    input::selection { background: #99248F; color: #fff; }
+    .field-hint { font-size: 14px; color: #888; margin-bottom: 20px; }
+    .field-group { margin-bottom: 20px; }
+    .euro-wrap { position: relative; }
+    .euro-wrap::before {
+      content: "€";
+      position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+      font-size: 18px; color: #666; pointer-events: none;
+    }
+    .euro-wrap input { padding-left: 36px; }
+    #geboortedatum { font-size: 22px; padding: 18px 20px; color: #333; }
+    #geboortedatum::selection { background: transparent; }
+    #geboortedatum::-webkit-datetime-edit-fields-wrapper { background: transparent; }
+    #geboortedatum::-webkit-datetime-edit-text,
+    #geboortedatum::-webkit-datetime-edit-month-field,
+    #geboortedatum::-webkit-datetime-edit-day-field,
+    #geboortedatum::-webkit-datetime-edit-year-field {
+      color: #333;
+    }
+    #geboortedatum::-webkit-datetime-edit-month-field:focus,
+    #geboortedatum::-webkit-datetime-edit-day-field:focus,
+    #geboortedatum::-webkit-datetime-edit-year-field:focus {
+      color: #333;
+      background: transparent;
+    }
+
+    /* ── RADIO OPTIONS ── */
+    .options { display: flex; flex-direction: column; gap: 12px; margin-bottom: 8px; }
+    .option-btn {
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      padding: 16px 20px;
+      cursor: pointer;
+      font-size: 17px;
+      font-weight: 600;
+      color: #333;
+      background: #fff;
+      text-align: left;
+      transition: all 0.2s;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .option-btn:hover { border-color: #99248F; background: #faf0fa; }
+    .option-btn.selected { border-color: #99248F; background: #faf0fa; color: #99248F; }
+    .option-btn .opt-icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 2px solid #ddd; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+    }
+    .option-btn.selected .opt-icon {
+      background: #99248F; border-color: #99248F; color: #fff;
+    }
+    .option-btn.selected .opt-icon::after { content: "✓"; }
+
+    /* ── LOOPTIJD GRID ── */
+    .looptijd-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px; margin-bottom: 8px;
+    }
+    .looptijd-btn {
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      padding: 20px 12px;
+      cursor: pointer;
+      font-size: 20px; font-weight: 700;
+      color: #333; background: #fff;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .looptijd-btn span { display: block; font-size: 13px; font-weight: 400; color: #888; margin-top: 4px; }
+    .looptijd-btn:hover { border-color: #99248F; background: #faf0fa; }
+    .looptijd-btn.selected { border-color: #99248F; background: #99248F; color: #fff; }
+    .looptijd-btn.selected span { color: #f0d0f0; }
+
+    /* ── CONDITIONAL FIELD ── */
+    .conditional { display: none; margin-top: 16px; padding: 16px; background: #faf0fa; border-radius: 8px; }
+    .conditional.visible { display: block; }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      display: block; width: 100%;
+      background: #99248F; color: #fff;
+      border: none; border-radius: 10px;
+      padding: 18px; font-size: 18px; font-weight: 700;
+      cursor: pointer; margin-top: 24px;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: #7A1B72; }
+    .btn-primary:disabled { background: #ccc; cursor: not-allowed; }
+    .btn-back {
+      background: none; border: none; color: #888;
+      font-size: 15px; cursor: pointer; margin-top: 12px;
+      display: block; text-align: center; padding: 8px;
+    }
+    .btn-back:hover { color: #99248F; }
+
+    /* ── ERROR ── */
+    .error { color: #c0392b; font-size: 14px; margin-top: 4px; display: none; }
+    .error.visible { display: block; }
+
+    /* ── RESULTS ── */
+    .result-header { text-align: center; margin-bottom: 28px; }
+    .result-header .check { font-size: 48px; margin-bottom: 12px; }
+    .result-header h1 { color: #99248F; }
+    .result-header p { color: #666; margin-top: 8px; }
+
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    .stat-box {
+      background: #faf0fa; border-radius: 10px; padding: 18px;
+      text-align: center; border: 1px solid #e8d0e8;
+    }
+    .stat-box.wide { grid-column: 1 / -1; }
+    .stat-box .stat-val { font-size: 28px; font-weight: 700; color: #99248F; }
+    .stat-box .stat-lbl { font-size: 13px; color: #888; margin-top: 4px; }
+    .stat-box .stat-sub { font-size: 12px; color: #aaa; margin-top: 2px; }
+
+    .erfenis-section { margin: 20px 0; }
+    .erfenis-title { font-weight: 700; color: #333; margin-bottom: 10px; font-size: 16px; }
+    .erfenis-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; font-size: 15px; }
+    .erfenis-row:last-child { border-bottom: none; }
+    .erfenis-row .year { color: #666; }
+    .erfenis-row .amount { font-weight: 700; color: #619C30; }
+
+    .geschikt-box {
+      border-radius: 10px; padding: 16px 20px; margin-bottom: 20px;
+      font-size: 15px; font-weight: 600;
+    }
+    .geschikt-box.ok { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+    .geschikt-box.warn { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+
+    .eenmalig-box {
+      background: #f0f8e8; border: 1px solid #b5d96a;
+      border-radius: 10px; padding: 16px 20px; margin-bottom: 20px;
+      font-size: 15px; color: #2e5e00;
+    }
+
+    .indicatief-note {
+      background: #f8f8f8; border-radius: 8px;
+      padding: 14px 16px; font-size: 13px; color: #888;
+      margin-bottom: 20px; line-height: 1.5;
+    }
+
+    .cta-section {
+      background: #99248F; color: #fff;
+      border-radius: 12px; padding: 28px 24px;
+      text-align: center; margin-top: 24px;
+    }
+    .cta-section h3 { font-size: 20px; margin-bottom: 8px; }
+    .cta-section p { font-size: 15px; opacity: 0.9; margin-bottom: 20px; }
+    .cta-row { display: flex; flex-direction: column; gap: 10px; }
+    .cta-btn {
+      display: block; padding: 14px;
+      border-radius: 8px; font-size: 16px; font-weight: 600;
+      text-decoration: none; text-align: center;
+      transition: opacity 0.2s;
+    }
+    .cta-btn:hover { opacity: 0.85; }
+    .cta-btn-white { background: #fff; color: #99248F; }
+    .cta-btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.6); }
+
+    .share-line {
+      text-align: center; margin-top: 16px; font-size: 14px; color: #888;
+      padding-top: 16px; border-top: 1px solid #eee;
+    }
+
+    /* ── LOADER ── */
+    .loader-wrap { text-align: center; padding: 40px 0; }
+    .loader {
+      width: 48px; height: 48px; border: 5px solid #eee;
+      border-top-color: #99248F; border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loader-text { color: #888; font-size: 16px; }
+
+    /* ── DISCLAIMER ── */
+    .disclaimer {
+      text-align: center; font-size: 13px; color: #999;
+      margin-top: 24px; line-height: 1.5;
+    }
+    .disclaimer a { color: #99248F; }
+
+    /* ── STEPS (hidden by default) ── */
+    .step { display: none; }
+    .step.active { display: block; }
+
+    /* ── Uitkeringspercentage weergave ── */
+    .pct-detail {
+      background: #f8f8f8;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      font-size: 14px;
+      color: #666;
+      line-height: 1.5;
+    }
+    .pct-detail strong { color: #99248F; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <img src="/400dpiLogo.png" alt="Consumentenzaken" class="nav-logo">
+  <div class="nav-contact">Vragen? <a href="tel:+31181356255">0181-356255</a></div>
+</nav>
+
+<div class="page-wrap">
+  <div class="card">
+
+    <!-- ══ STAP 0: GEGEVENS ══ -->
+    <div class="step active" id="step-0">
+      <div class="step-tag">Gratis berekening</div>
+      <h1>Ontdek wat uw huis voor u oplevert</h1>
+      <p class="step-sub">Vul uw gegevens in — Alex neemt daarna contact met u op met uw Persoonlijk Overzicht.</p>
+
+      <div class="field-group">
+        <label for="naam">Uw naam</label>
+        <input type="text" id="naam" placeholder="Voor- en achternaam" autocomplete="name">
+        <div class="error" id="err-naam">Vul uw naam in.</div>
+      </div>
+      <div class="field-group">
+        <label for="email">E-mailadres</label>
+        <input type="email" id="email" placeholder="uw@email.nl" autocomplete="email">
+        <div class="error" id="err-email">Vul een geldig e-mailadres in.</div>
+      </div>
+      <div class="field-group">
+        <label for="telefoon">Telefoonnummer</label>
+        <input type="tel" id="telefoon" placeholder="06-12345678" autocomplete="tel">
+        <div class="error" id="err-telefoon">Vul uw telefoonnummer in.</div>
+      </div>
+
+      <button class="btn-primary" onclick="goStep(1)">Start de berekening →</button>
+      <p class="disclaimer">Uw gegevens worden uitsluitend gebruikt voor uw persoonlijke berekening en niet gedeeld met derden.
+        <a href="https://consumentenzaken.com/privacy-policy/" target="_blank">Privacyverklaring</a></p>
+    </div>
+
+    <!-- ══ STAP 1: WONINGWAARDE ══ -->
+    <div class="step" id="step-1">
+      <div class="progress-wrap">
+        <div class="progress-label">Vraag 1 van 7</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:14%"></div></div>
+      </div>
+      <div class="step-tag">Uw woning</div>
+      <h1>Wat is de geschatte WOZ-/taxatiewaarde van uw woning?</h1>
+      <p class="step-sub">Een eigen schatting is prima — u hoeft geen taxatierapport te hebben.</p>
+      <div class="euro-wrap">
+        <input type="number" id="woningwaarde" placeholder="bijv. 350000" min="100000" step="5000">
+      </div>
+      <div class="error" id="err-waarde">Vul een woningwaarde in (minimaal €100.000).</div>
+      <button class="btn-primary" onclick="goStep(2)">Volgende →</button>
+      <button class="btn-back" onclick="goStep(0)">← Terug</button>
+    </div>
+
+    <!-- ══ STAP 2: HYPOTHEEK ══ -->
+    <div class="step" id="step-2">
+      <div class="progress-wrap">
+        <div class="progress-label">Vraag 2 van 7</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:28%"></div></div>
+      </div>
+      <div class="step-tag">Uw hypotheek</div>
+      <h1>Hoeveel hypotheek staat er nog open?</h1>
+      <p class="step-sub">Bent u hypotheekvrij? Vul dan 0 in.</p>
+      <div class="euro-wrap">
+        <input type="number" id="hypotheek" placeholder="bijv. 50000" min="0" step="5000" value="0">
+      </div>
+      <div class="error" id="err-hyp">Vul een bedrag in (0 als u geen hypotheek heeft).</div>
+      <button class="btn-primary" onclick="goStep(3)">Volgende →</button>
+      <button class="btn-back" onclick="goStep(1)">← Terug</button>
+    </div>
+
+    <!-- ══ STAP 3: GEBOORTEDATUM ══ -->
+    <div class="step" id="step-3">
+      <div class="progress-wrap">
+        <div class="progress-label">Vraag 3 van 7</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:42%"></div></div>
+      </div>
+      <div class="step-tag">Uw geboortedatum</div>
+      <h1>Wat is de geboortedatum van de jongste bewoner?</h1>
+      <p class="step-sub">Woont u samen? Vul dan de geboortedatum van de jongste partner in. Dit product is beschikbaar vanaf 68 jaar op de passeerdatum (ca. 3 maanden vanaf nu).</p>
+      <input type="date" id="geboortedatum" min="1925-01-01" max="2008-12-31">
+      <div class="error" id="err-leeftijd">Vul een geldige geboortedatum in. De jongste bewoner moet minimaal 68 jaar zijn rond de verwachte passeerdatum (ca. 12 weken vanaf vandaag).</div>
+      <button class="btn-primary" onclick="goStep(4)">Volgende →</button>
+      <button class="btn-back" onclick="goStep(3)">← Terug</button>
+    </div>
+
+    <!-- ══ STAP 4: PARTNER ══ -->
+    <div class="step" id="step-4">
+      <div class="progress-wrap">
+        <div class="progress-label">Vraag 4 van 7</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:56%"></div></div>
+      </div>
+      <div class="step-tag">Woonsituatie</div>
+      <h1>Woont er een partner bij u in?</h1>
+      <p class="step-sub">Dit heeft invloed op het uitkeringspercentage.</p>
+      <div class="options">
+        <button class="option-btn" id="partner-nee" onclick="selectPartner('nee')">
+          <div class="opt-icon"></div>
+          Nee, ik woon alleen
+        </button>
+        <button class="option-btn" id="partner-ja" onclick="selectPartner('ja')">
+          <div class="opt-icon"></div>
+          Ja, ik woon samen met een partner
+        </button>
+      </div>
+      <div class="error" id="err-partner">Maak een keuze.</div>
+      <button class="btn-primary" onclick="goStep(5)">Volgende →</button>
+      <button class="btn-back" onclick="goStep(3)">← Terug</button>
+    </div>
+
+    <!-- ══ STAP 5: LOOPTIJD ══ -->
+    <div class="step" id="step-5">
+      <div class="progress-wrap">
+        <div class="progress-label">Vraag 5 van 7</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:70%"></div></div>
+      </div>
+      <div class="step-tag">Looptijd</div>
+      <h1>Tot welke leeftijd wilt u de uitkering laten lopen?</h1>
+      <p class="step-sub">Bij kortere looptijd neemt het maandbedrag toe: tot 95 jaar (+5%), tot 90 jaar (+10%), tot 85 jaar (+25%). De standaard is 100 jaar.</p>
+      <div class="looptijd-grid">
+        <button class="looptijd-btn" id="lt-85" onclick="selectLooptijd(85)">85 jr<span>+25% toeslag</span></button>
+        <button class="looptijd-btn" id="lt-90" onclick="selectLooptijd(90)">90 jr<span>+10% toeslag</span></button>
+        <button class="looptijd-btn" id="lt-95" onclick="selectLooptijd(95)">95 jr<span>+5% toeslag</span></button>
+        <button class="looptijd-btn selected" id="lt-100" onclick="selectLooptijd(100)">100 jr<span>Standaard keuze</span></button>
+      </div>
+      <div class="error" id="err-looptijd">Maak een keuze.</div>
+      <button class="btn-primary" onclick="goStep(6)">Volgende →</button>
+      <button class="btn-back" onclick="goStep(4)">← Terug</button>
+    </div>
+
+    <!-- ══ STAP 6: ERFGENAMEN ══ -->
+    <div class="step" id="step-6">
+      <div class="progress-wrap">
+        <div class="progress-label">Vraag 6 van 7</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:84%"></div></div>
+      </div>
+      <div class="step-tag">Erfenis</div>
+      <h1>Wilt u dat de uitkering na uw overlijden doorloopt naar uw kinderen/erfgenamen?</h1>
+      <p class="step-sub">Als u kiest voor doorbetaling, valt de maandelijkse uitkering iets lager uit — maar uw erfgenamen ontvangen de resterende uitkeringen na uw overlijden.</p>
+      <div class="options">
+        <button class="option-btn" id="erf-nee" onclick="selectErfenis('nee')">
+          <div class="opt-icon"></div>
+          Nee — ik wil het hoogste maandbedrag voor mijzelf
+        </button>
+        <button class="option-btn" id="erf-ja" onclick="selectErfenis('ja')">
+          <div class="opt-icon"></div>
+          Ja — mijn erfgenamen ontvangen de rest na mijn overlijden
+        </button>
+      </div>
+      <div class="error" id="err-erfenis">Maak een keuze.</div>
+      <button class="btn-primary" onclick="goStep(7)">Volgende →</button>
+      <button class="btn-back" onclick="goStep(5)">← Terug</button>
+    </div>
+
+    <!-- ══ STAP 7: EENMALIG BEDRAG ══ -->
+    <div class="step" id="step-7">
+      <div class="progress-wrap">
+        <div class="progress-label">Vraag 7 van 7</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:98%"></div></div>
+      </div>
+      <div class="step-tag">Voorschot / eenmalig bedrag</div>
+      <h1>Wilt u eenmalig een bedrag ontvangen als voorschot op uw uitkeringen?</h1>
+      <p class="step-sub">Denk aan een camper, schenking of verbouwing. Dit is een vooruitbetaling van uw eerste maandtermijnen — uw maandbedrag blijft hetzelfde, maar de uitkering start later. Maximum is €30.000.</p>
+      <div class="options">
+        <button class="option-btn" id="een-nee" onclick="selectEenmalig('nee')">
+          <div class="opt-icon"></div>
+          Nee — ik wil alleen de maandelijkse uitkering
+        </button>
+        <button class="option-btn" id="een-ja" onclick="selectEenmalig('ja')">
+          <div class="opt-icon"></div>
+          Ja — ik wil ook een eenmalig bedrag (voorschot)
+        </button>
+      </div>
+      <div class="conditional" id="eenmalig-invoer">
+        <label for="eenmalig-bedrag">Gewenst eenmalig bedrag (max €30.000)</label>
+        <div class="euro-wrap">
+          <input type="number" id="eenmalig-bedrag" placeholder="bijv. 10000" min="1000" max="30000" step="1000">
+        </div>
+      </div>
+      <div class="error" id="err-eenmalig">Maak een keuze.</div>
+      <button class="btn-primary" onclick="berekenEnToon()">Bereken mijn overzicht →</button>
+      <button class="btn-back" onclick="goStep(6)">← Terug</button>
+    </div>
+
+    <!-- ══ LADEN ══ -->
+    <div class="step" id="step-laden">
+      <div class="loader-wrap">
+        <div class="loader"></div>
+        <p class="loader-text">Uw Persoonlijk Overzicht wordt berekend…</p>
+      </div>
+    </div>
+
+    <!-- ══ RESULTAAT ══ -->
+    <div class="step" id="step-resultaat">
+      <div class="result-header">
+        
+        <div class="check">✅</div>
+        <h1>Uw Persoonlijk Overzicht</h1>
+        <p>Indicatieve berekening op basis van het Welvarend Wonen Overwaardeplan</p>
+      </div>
+
+      <div id="geschiktheid-box"></div>
+
+      <div id="pct-detail-box"></div>
+
+      <div class="stat-grid" id="stat-grid"></div>
+
+      <div id="eenmalig-resultaat"></div>
+
+      <div class="erfenis-section" id="erfenis-sectie" style="display:none">
+        <div class="erfenis-title">Resterend bedrag voor erfgenamen — indicatief</div>
+        <div id="erfenis-rows"></div>
+      </div>
+
+      <div class="indicatief-note">
+        ⓘ Alle bedragen zijn <strong>indicatief</strong>. Het definitieve bedrag wordt vastgesteld door Welvarend Wonen na taxatie en bouwkundige keuring. Geen rechten aan te ontlenen.
+      </div>
+
+      <div class="cta-section">
+        <h3>Klaar voor de volgende stap?</h3>
+        <p>Plan een gratis, vrijblijvend oriëntatiegesprek met Alex. U tekent niets en beslist zelf of en wanneer u een vervolgstap zet.</p>
+        <div class="cta-row">
+          <a href="tel:+31181356255" class="cta-btn cta-btn-white">📞 Bel Alex: 0181-356255</a>
+          <a href="https://wa.me/31612826368" target="_blank" class="cta-btn cta-btn-outline">💬 WhatsApp: 06-12826368</a>
+          <a href="mailto:alex@consumentenzaken.com" class="cta-btn cta-btn-outline">✉️ Stuur een e-mail</a>
+        </div>
+      </div>
+
+      <div class="share-line">
+        Deel dit overzicht met uw partner of kinderen via de terugknop van uw browser en stuur de link door.
+      </div>
+
+      <p class="disclaimer" style="margin-top:20px;">
+        Alex Noordermeer · Consumentenzaken · Warmoezenierstraat 24, 3231 BR Brielle · 0181-356255<br>
+        SEH-geregistreerd · AFM 12019426 (via VP Wonen Spijkenisse) · Kifid 300.013701<br>
+        <a href="https://consumentenzaken.com/privacy-policy/" target="_blank">Privacyverklaring</a>
+      </p>
+    </div>
+
+  </div><!-- /card -->
+</div><!-- /page-wrap -->
+
+<script>
+  // ── STATE ──
+  const data = {
+    naam: '', email: '', telefoon: '',
+    woningwaarde: null, hypotheek: 0,
+    geboortedatum: null, leeftijd: null, partner: null,
+    looptijd: 100, erfenis: null,
+    eenmalig: null, eenmaligBedrag: 0
+  };
+
+  // ═══════════════════════════════════════════
+  //  WELVAREND WONEN PERCENTAGE TABLE (SE)
+  // ═══════════════════════════════════════════
+  // Key: "relatie|doorbetalenErfgenamen"
+  // Each entry: { ageMin, ageMax, ltv: [{ threshold, pct }] }
+  // threshold = hypotheek/taxatiewaarde * 100 (LTV %)
+  // pct = uitkeringspercentage (as decimal fraction)
+  // ═══════════════════════════════════════════
+
+  function makeEntry(ageMin, ageMax, ltvMap) {
+    return {
+      ageMin, ageMax,
+      ltv: Object.entries(ltvMap).map(function(entry) {
+        return { threshold: Number(entry[0]), pct: entry[1] };
+      }).sort(function(a, b) { return a.threshold - b.threshold; })
+    };
+  }
+
+  var PERCENTAGE_TABLE = {
+    "alleenstaand|nee": [
+      makeEntry(68, 72, {0:0.80, 10:0.80, 20:0.80, 30:0.80, 40:0.90, 50:0.90}),
+      makeEntry(73, 74, {0:0.85, 10:0.85, 20:0.85, 30:0.90, 40:1.00, 50:1.00}),
+      makeEntry(75, 150, {0:1.00, 10:1.00, 20:1.00, 30:1.00, 40:1.00, 50:1.00})
+    ],
+    "alleenstaand|ja": [
+      makeEntry(68, 72, {0:0.70, 10:0.70, 20:0.70, 30:0.70, 40:0.80, 50:0.80}),
+      makeEntry(73, 74, {0:0.75, 10:0.75, 20:0.75, 30:0.80, 40:0.90, 50:0.90}),
+      makeEntry(75, 150, {0:0.90, 10:0.90, 20:0.90, 30:0.90, 40:0.90, 50:0.90})
+    ],
+    "samenwonend|nee": [
+      makeEntry(68, 72, {0:0.75, 10:0.75, 20:0.75, 30:0.75, 40:0.85, 50:0.85}),
+      makeEntry(73, 74, {0:0.80, 10:0.80, 20:0.80, 30:0.85, 40:0.95, 50:0.95}),
+      makeEntry(75, 150, {0:0.95, 10:0.95, 20:0.95, 30:0.95, 40:0.95, 50:0.95})
+    ],
+    "samenwonend|ja": [
+      makeEntry(68, 72, {0:0.65, 10:0.65, 20:0.65, 30:0.65, 40:0.75, 50:0.75}),
+      makeEntry(73, 74, {0:0.70, 10:0.70, 20:0.70, 30:0.75, 40:0.85, 50:0.85}),
+      makeEntry(75, 150, {0:0.85, 10:0.85, 20:0.85, 30:0.85, 40:0.85, 50:0.85})
+    ]
+  };
+
+  // Look up percentage from the Welvarend Wonen table
+  // Bereken exacte leeftijd op een bepaalde datum
+  function berekenLeeftijd(geboortedatum, peildatum) {
+    var leeftijd = peildatum.getFullYear() - geboortedatum.getFullYear();
+    var m = peildatum.getMonth() - geboortedatum.getMonth();
+    if (m < 0 || (m === 0 && peildatum.getDate() < geboortedatum.getDate())) {
+      leeftijd--;
+    }
+    return leeftijd;
+  }
+
+  // Tel exact het aantal maanden tussen twee datums
+  function telMaanden(van, tot) {
+    var maanden = 0;
+    var d = new Date(van);
+    while (d < tot) {
+      maanden++;
+      d.setMonth(d.getMonth() + 1);
+    }
+    return maanden;
+  }
+
+    function lookupPercentage(relatie, erf, leeftijd, ltvPct) {
+    var key = relatie + "|" + erf;
+    var entries = PERCENTAGE_TABLE[key];
+    if (!entries || entries.length === 0) return null;
+
+    // Find matching age bracket
+    var entry = null;
+    for (var i = 0; i < entries.length; i++) {
+      if (leeftijd >= entries[i].ageMin && leeftijd <= entries[i].ageMax) {
+        entry = entries[i];
+        break;
+      }
+    }
+    if (!entry) {
+      // Fallback: sort by ageMin, use closest
+      var sorted = entries.slice().sort(function(a, b) { return a.ageMin - b.ageMin; });
+      entry = leeftijd < sorted[0].ageMin ? sorted[0] : sorted[sorted.length - 1];
+    }
+
+    // Find matching LTV threshold
+    var ltvs = entry.ltv; // already sorted
+    if (ltvs.length === 0) return null;
+    var best = ltvs[0];
+    for (var j = 0; j < ltvs.length; j++) {
+      if (ltvPct >= ltvs[j].threshold) {
+        best = ltvs[j];
+      } else {
+        break;
+      }
+    }
+    return best.pct;
+  }
+
+  // ── NAVIGATIE ──
+  function goStep(n) {
+    if (n > 0 && !validate(n - 1)) return;
+    document.querySelectorAll('.step').forEach(function(s) { s.classList.remove('active'); });
+    document.getElementById('step-' + n).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  // ── VALIDATIE ──
+  function validate(step) {
+    clearErrors();
+    if (step === 0) {
+      var ok = true;
+      data.naam = document.getElementById('naam').value.trim();
+      data.email = document.getElementById('email').value.trim();
+      data.telefoon = document.getElementById('telefoon').value.trim();
+      if (!data.naam) { show('err-naam'); ok = false; }
+      if (!data.email || data.email.indexOf('@') === -1) { show('err-email'); ok = false; }
+      if (!data.telefoon) { show('err-telefoon'); ok = false; }
+      return ok;
+    }
+    if (step === 1) {
+      data.woningwaarde = parseFloat(document.getElementById('woningwaarde').value);
+      if (!data.woningwaarde || data.woningwaarde < 100000) { show('err-waarde'); return false; }
+    }
+    if (step === 2) {
+      data.hypotheek = parseFloat(document.getElementById('hypotheek').value) || 0;
+      if (data.hypotheek < 0) { show('err-hyp'); return false; }
+    }
+    if (step === 3) {
+      var gd = document.getElementById('geboortedatum').value;
+      if (!gd) { show('err-leeftijd'); return false; }
+      data.geboortedatum = new Date(gd + 'T00:00:00');
+      if (isNaN(data.geboortedatum.getTime())) { show('err-leeftijd'); return false; }
+      // Passeerdatum: vandaag + 12 weken (minimale eis Welvarend Wonen)
+      var passeerdatum = new Date();
+      passeerdatum.setDate(passeerdatum.getDate() + 84);
+      data.leeftijd = berekenLeeftijd(data.geboortedatum, passeerdatum);
+      data.passeerdatum = passeerdatum;
+      if (data.leeftijd < 68) { show('err-leeftijd'); return false; }
+    }
+    if (step === 4) {
+      if (!data.partner) { show('err-partner'); return false; }
+    }
+    if (step === 5) {
+      if (!data.looptijd) { show('err-looptijd'); return false; }
+    }
+    if (step === 6) {
+      if (!data.erfenis) { show('err-erfenis'); return false; }
+    }
+    return true;
+  }
+
+  function clearErrors() {
+    document.querySelectorAll('.error').forEach(function(e) { e.classList.remove('visible'); });
+  }
+  function show(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('visible');
+  }
+
+  // ── KEUZE HELPERS ──
+  function selectPartner(v) {
+    data.partner = v;
+    document.getElementById('partner-nee').classList.toggle('selected', v === 'nee');
+    document.getElementById('partner-ja').classList.toggle('selected', v === 'ja');
+  }
+  function selectLooptijd(v) {
+    data.looptijd = v;
+    [85, 90, 95, 100].forEach(function(yr) {
+      document.getElementById('lt-' + yr).classList.toggle('selected', yr === v);
+    });
+  }
+  function selectErfenis(v) {
+    data.erfenis = v;
+    document.getElementById('erf-nee').classList.toggle('selected', v === 'nee');
+    document.getElementById('erf-ja').classList.toggle('selected', v === 'ja');
+  }
+  function selectEenmalig(v) {
+    data.eenmalig = v;
+    document.getElementById('een-nee').classList.toggle('selected', v === 'nee');
+    document.getElementById('een-ja').classList.toggle('selected', v === 'ja');
+    document.getElementById('eenmalig-invoer').classList.toggle('visible', v === 'ja');
+  }
+
+  // ── BEREKENING (Welvarend Wonen algoritme) ──
+  function berekenEnToon() {
+    if (!validate(7)) {
+      if (!data.eenmalig) { show('err-eenmalig'); return; }
+    }
+    if (data.eenmalig === 'ja') {
+      data.eenmaligBedrag = Math.min(parseFloat(document.getElementById('eenmalig-bedrag').value) || 0, 30000);
+    } else {
+      data.eenmaligBedrag = 0;
+    }
+
+    // Toon laadindicator
+    document.querySelectorAll('.step').forEach(function(s) { s.classList.remove('active'); });
+    document.getElementById('step-laden').classList.add('active');
+    window.scrollTo(0, 0);
+
+    setTimeout(function() {
+      var r = bereken();
+      toonResultaat(r);
+    }, 1500);
+  }
+
+  function bereken() {
+    var woningwaarde = data.woningwaarde;        // Tr = estimatedTaxValue
+    var hypotheek = data.hypotheek || 0;          // wi = openstaandeHypotheek
+    var leeftijd = data.leeftijd;
+    var partner = data.partner;                    // 'ja' = samenwonend, 'nee' = alleenstaand
+    var looptijd = data.looptijd;                  // 85, 90, 95, 100
+    var erfenis = data.erfenis;                    // 'ja'/'nee' = doorbetalenErfgenamen
+    var eenmaligBedrag = data.eenmaligBedrag || 0; // som (voorschot)
+
+    var relatie = partner === 'ja' ? 'samenwonend' : 'alleenstaand';
+    var erfKey = erfenis === 'ja' ? 'ja' : 'nee';
+
+    // Overwaarde
+    var overwaarde = woningwaarde - hypotheek;
+
+    // Geschiktheid: 68+ jaar en minimaal €125.000 overwaarde
+    var geschikt = leeftijd >= 68 && overwaarde >= 125000;
+
+    // LTV ratio (hypotheek / taxatiewaarde * 100)
+    var ltvPct = woningwaarde > 0 ? (hypotheek / woningwaarde) * 100 : 0;
+
+    // Look up base percentage from Welvarend Wonen table
+    var basePctFraction = lookupPercentage(relatie, erfKey, leeftijd, ltvPct);
+    if (basePctFraction === null) basePctFraction = 0;
+    var basePct = basePctFraction * 100; // On = percentage (0-100)
+
+    // Total payout from tax value: ps * On / 100
+    // (no flexPercentage adjustment, so ps = Tr)
+    var totaleUitkering = woningwaarde * basePct / 100; // _a
+
+    // Subtract hypotheek
+    var naHypotheek = Math.max(0, totaleUitkering - hypotheek); // Dc
+
+    // Apply eenmalig if it's NOT voorschot (but in our simplified form it's always voorschot)
+    // In our form, eenmalig = voorschot (vooruitbetaling === "ja")
+    var beschikbaar = naHypotheek; // Ec
+
+    // Calculate months precisely using birth date + passeerdatum
+    // Target date for age 100: birth date + 100 years
+    var eindDatum100 = new Date(data.geboortedatum);
+    eindDatum100.setFullYear(eindDatum100.getFullYear() + 100);
+    var maandenTot100 = telMaanden(data.passeerdatum, eindDatum100); // go
+    var jarenTot100 = maandenTot100 / 12; // Lc
+
+    // Base monthly = beschikbaar / maandenTot100
+    var basisMaand = maandenTot100 > 0 ? beschikbaar / maandenTot100 : 0;
+
+    // Round: >0.5 rounds normally, between 0 and 0.5 goes to 1, 0 stays 0
+    var afgerond;
+    if (basisMaand > 0.5) {
+      afgerond = Math.round(basisMaand);
+    } else if (basisMaand > 0) {
+      afgerond = 1;
+    } else {
+      afgerond = 0;
+    }
+
+    // Looptijd adjustment (toeslag op maandbedrag)
+    var maandbedrag = afgerond; // gs
+    if (looptijd === 95) {
+      maandbedrag = Math.round(afgerond * 1.05);
+    } else if (looptijd === 90) {
+      maandbedrag = Math.round(afgerond * 1.10);
+    } else if (looptijd === 85) {
+      maandbedrag = Math.round(afgerond * 1.25);
+    }
+
+    var jaarbedrag = maandbedrag * 12; // hh
+
+    // Looptijd maanden - precies berekend
+    var eindDatumLooptijd = new Date(data.geboortedatum);
+    eindDatumLooptijd.setFullYear(eindDatumLooptijd.getFullYear() + looptijd);
+    var looptijdMaanden = telMaanden(data.passeerdatum, eindDatumLooptijd); // po
+    if (looptijdMaanden < 0) looptijdMaanden = 0;
+    if (maandenTot100 < 0) maandenTot100 = 0;
+
+    // Voorschot / eenmalig bedrag handling
+    var voorschotMaanden = 0;
+    var daadwerkelijkVoorschot = 0;
+    var resterendeMaanden = looptijdMaanden;
+    if (eenmaligBedrag > 0 && maandbedrag > 0) {
+      // Welvarend Wonen: 12 weken verwerkingstijd = ~3 maanden voordat uitkering start
+      // De weg naar de einddatum wordt 3 maanden korter, dus hetzelfde bedrag
+      // over minder maanden → hoger maandbedrag
+      var effectieveLooptijdMaanden = Math.max(1, looptijdMaanden - 3);
+      var nieuwMaandbedrag = beschikbaar / effectieveLooptijdMaanden;
+      if (nieuwMaandbedrag > 0.5) {
+        nieuwMaandbedrag = Math.round(nieuwMaandbedrag);
+      } else if (nieuwMaandbedrag > 0) {
+        nieuwMaandbedrag = 1;
+      } else {
+        nieuwMaandbedrag = 0;
+      }
+      maandbedrag = nieuwMaandbedrag;
+      jaarbedrag = maandbedrag * 12;
+
+      voorschotMaanden = Math.ceil(eenmaligBedrag / maandbedrag);
+      daadwerkelijkVoorschot = voorschotMaanden * maandbedrag;
+      daadwerkelijkVoorschot = Math.min(daadwerkelijkVoorschot, beschikbaar);
+      resterendeMaanden = Math.max(0, effectieveLooptijdMaanden - voorschotMaanden);
+    }
+
+    // Total monthly payments over looptijd
+    var totaalMaandTermijnen = maandbedrag * resterendeMaanden; // Tc
+
+    // Total payout: all monthly + lump sum + hypotheek
+    var totaalUitgekeerd = totaalMaandTermijnen + daadwerkelijkVoorschot + hypotheek; // Ks
+
+    // Base percentage: total payout / tax value * 100
+    var effectiefPct = woningwaarde > 0 ? Math.round((totaalUitgekeerd / woningwaarde) * 100) : 0;
+
+    // Erfenis: total remaining if they die at various points
+    // For "doorbetalen erfgenamen", the remaining monthly payments go to heirs
+    var tijdlijn = [];
+    if (erfenis === 'ja') {
+      [10, 15, 20].forEach(function(t) {
+        var restMaanden = Math.max(0, resterendeMaanden - Math.max(t * 12, voorschotMaanden));
+        var bedrag = restMaanden * maandbedrag;
+        tijdlijn.push({ jaar: t, bedrag: Math.max(0, bedrag) });
+      });
+    }
+
+    return {
+      leeftijd: leeftijd,
+      geschikt: geschikt,
+      overwaarde: overwaarde,
+      maandbedrag: maandbedrag,
+      jaarbedrag: jaarbedrag,
+      totaalLooptijd: totaalMaandTermijnen,
+      totaalUitgekeerd: totaalUitgekeerd,
+      basePct: Math.round(basePct),
+      effectiefPct: effectiefPct,
+      ltvPct: Math.round(ltvPct),
+      erfenisReserve: 0,
+      tijdlijn: tijdlijn,
+      voorschotMaanden: voorschotMaanden,
+      daadwerkelijkVoorschot: daadwerkelijkVoorschot,
+      eenmaligBedrag: eenmaligBedrag,
+      looptijdMaanden: looptijdMaanden,
+      resterendeMaanden: resterendeMaanden,
+      looptijd: looptijd,
+      relatie: relatie,
+      erfKey: erfKey,
+      leeftijd: leeftijd
+    };
+  }
+
+  function fmt(n) {
+    return '€\u00A0' + Math.round(n).toLocaleString('nl-NL');
+  }
+
+  function toonResultaat(r) {
+    // Geschiktheid
+    var gbox = document.getElementById('geschiktheid-box');
+    if (r.geschikt) {
+      gbox.innerHTML = '<div class="geschikt-box ok">✅ U voldoet aan de minimale criteria voor het Welvarend Wonen Overwaardeplan (68+ jaar, min. €125.000 overwaarde).</div>';
+    } else {
+      var reden = [];
+      if (r.leeftijd < 68) reden.push('leeftijd jongste bewoner is lager dan 68 jaar');
+      if (r.overwaarde < 125000) reden.push('overwaarde is lager dan €125.000');
+      gbox.innerHTML = '<div class="geschikt-box warn">⚠️ Op basis van deze gegevens voldoet u mogelijk nog niet aan alle criteria: ' + reden.join(' en ') + '. Alex bespreekt graag uw persoonlijke situatie — criteria kunnen per geval verschillen.</div>';
+    }
+
+    // Percentage detail
+    var pbox = document.getElementById('pct-detail-box');
+    pbox.innerHTML = '<div class="pct-detail">' +
+      '<strong>Leeftijd op passeerdatum:</strong> ' + r.leeftijd + ' jaar<br>' +
+      '<strong>Uitkeringspercentage:</strong> ' + r.basePct + '% van de taxatiewaarde' +
+      ' (categorie: ' + (r.relatie === 'samenwonend' ? 'samenwonend' : 'alleenstaand') +
+      ', doorbetalen erfgenamen: ' + (r.erfKey === 'ja' ? 'ja' : 'nee') +
+      ', leeftijdsgroep: ' + r.leeftijd + ' jaar' +
+      ', LTV: ' + r.ltvPct + '%)' +
+      '<br><strong>Effectief percentage</strong> (incl. looptijdtoeslag): <strong>' + r.effectiefPct + '%</strong>' +
+      '</div>';
+
+    // Stat grid
+    document.getElementById('stat-grid').innerHTML =
+      '<div class="stat-box">' +
+        '<div class="stat-val">' + fmt(r.maandbedrag) + '</div>' +
+        '<div class="stat-lbl">Geschat maandbedrag</div>' +
+        '<div class="stat-sub">indicatief · levenslang tot ' + r.looptijd + ' jaar</div>' +
+      '</div>' +
+      '<div class="stat-box">' +
+        '<div class="stat-val">' + fmt(r.jaarbedrag) + '</div>' +
+        '<div class="stat-lbl">Per jaar</div>' +
+        '<div class="stat-sub">indicatief</div>' +
+      '</div>' +
+      '<div class="stat-box wide">' +
+        '<div class="stat-val">' + fmt(r.totaalLooptijd) + '</div>' +
+        '<div class="stat-lbl">Totaal maandtermijnen tot ' + r.looptijd + ' jaar</div>' +
+        '<div class="stat-sub">indicatief · exclusief eenmalig bedrag & hypotheekaflossing</div>' +
+      '</div>' +
+      '<div class="stat-box wide">' +
+        '<div class="stat-val">' + fmt(r.totaalUitgekeerd) + '</div>' +
+        '<div class="stat-lbl">Totaal uitgekeerd (incl. eenmalig + hypotheek)</div>' +
+        '<div class="stat-sub">indicatief · ' + r.effectiefPct + '% van de taxatiewaarde</div>' +
+      '</div>';
+
+    // Eenmalig bedrag
+    var ebox = document.getElementById('eenmalig-resultaat');
+    if (r.eenmaligBedrag > 0) {
+      ebox.innerHTML =
+        '<div class="eenmalig-box">' +
+          '<strong>Voorschot:</strong> ' + fmt(r.daadwerkelijkVoorschot) + '<br>' +
+          'Dit komt overeen met de eerste <strong>' + r.voorschotMaanden + ' maandtermijnen</strong>.<br>' +
+          'Uw reguliere maanduitkering van ' + fmt(r.maandbedrag) + ' start <strong>vanaf maand ' + (r.voorschotMaanden + 1) + '</strong>.' +
+        '</div>';
+    } else {
+      ebox.innerHTML = '';
+    }
+
+    // Erfenis tijdlijn
+    if (data.erfenis === 'ja') {
+      document.getElementById('erfenis-sectie').style.display = 'block';
+      document.getElementById('erfenis-rows').innerHTML = r.tijdlijn.map(function(t) {
+        return '<div class="erfenis-row">' +
+          '<span class="year">Na ' + t.jaar + ' jaar</span>' +
+          '<span class="amount">' + fmt(t.bedrag) + '</span>' +
+        '</div>';
+      }).join('');
+    } else {
+      document.getElementById('erfenis-sectie').style.display = 'none';
+    }
+
+    // Toon resultaat
+    document.querySelectorAll('.step').forEach(function(s) { s.classList.remove('active'); });
+    document.getElementById('step-resultaat').classList.add('active');
+    window.scrollTo(0, 0);
+
+    // Stuur lead (Formspree placeholder)
+    stuurLead(r);
+  }
+
+  function stuurLead(r) {
+    // Splits naam in voornaam en achternaam (laatste woord = achternaam)
+    var naamDelen = (data.naam || '').trim().split(/\s+/);
+    var voornaam = naamDelen.slice(0, -1).join(' ') || naamDelen[0] || '';
+    var achternaam = naamDelen.length > 1 ? naamDelen[naamDelen.length - 1] : '';
+
+    var body = {
+      email: data.email,
+      phone: data.telefoon,
+      fields: {
+        FirstName: voornaam,
+        LastName: achternaam,
+        Woningwaarde: String(data.woningwaarde || ''),
+        OpenstaandeHypotheek: String(data.hypotheek || 0),
+        GeboortedatumJongsteBewoner: data.geboortedatum ? data.geboortedatum.toISOString().split('T')[0] : '',
+        PartnerInwonend: data.partner || '',
+        IndicatiefMaandbedrag: String(Math.round(r.maandbedrag)),
+        VoorschotBedrag: String(data.eenmaligBedrag || 0)
+      }
+    };
+
+    fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    }).then(function(resp) {
+      console.log('Lead verstuurd:', resp.status);
+    }).catch(function(err) {
+      console.error('Lead mislukt:', err);
+    });
+  }
+
+  // Default looptijd = 100
+  window.addEventListener('DOMContentLoaded', function() {
+    selectLooptijd(100);
+  });
+</script>
+
+</body>
+</html>
