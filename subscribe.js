@@ -1,16 +1,8 @@
 // api/subscribe.js
-// Vercel serverless functie: stuurt een nieuwe lead naar EmailOctopus (API v2)
-// en verstuurt een notificatie-mail via SMTP.
-
-const nodemailer = require("nodemailer");
+// Vercel serverless functie: stuurt een nieuwe lead naar EmailOctopus (API v2).
 
 const API_KEY = process.env.EMAILOCTOPUS_API_KEY;
 const LIST_ID = process.env.EMAILOCTOPUS_LIST_ID;
-const SMTP_HOST = process.env.SMTP_HOST;
-const SMTP_PORT = process.env.SMTP_PORT;
-const SMTP_USER = process.env.SMTP_USER;
-const SMTP_PASS = process.env.SMTP_PASS;
-const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL;
 
 module.exports = async (req, res) => {
   // CORS
@@ -44,7 +36,6 @@ module.exports = async (req, res) => {
       return;
     }
 
-    // ── EmailOctopus: contact toevoegen ──
     var eoFields = {};
     if (fields) {
       Object.keys(fields).forEach(function (k) {
@@ -69,61 +60,24 @@ module.exports = async (req, res) => {
       }
     );
 
-    if (!response.ok) {
-      const data = await response.json().catch(() => ({}));
-      const alreadyExists =
-        response.status === 409 ||
-        (data.errors || []).some((e) =>
-          (e.detail || "").toLowerCase().includes("already exists")
-        );
-      if (!alreadyExists) {
-        res.status(502).json({ error: "EmailOctopus weigerde", detail: data });
-        return;
-      }
+    if (response.ok) {
+      res.status(200).json({ ok: true });
+      return;
     }
 
-    // ── Notificatie-mail versturen ──
-    if (SMTP_HOST && SMTP_USER && SMTP_PASS && NOTIFY_EMAIL) {
-      try {
-        const transporter = nodemailer.createTransport({
-          host: SMTP_HOST,
-          port: parseInt(SMTP_PORT || "465"),
-          secure: true,
-          auth: {
-            user: SMTP_USER,
-            pass: SMTP_PASS,
-          },
-        });
+    const data = await response.json().catch(() => ({}));
 
-        // Bouw een overzichtelijk mailtje
-        var veldenTekst = "";
-        var v = eoFields;
-        if (v.FirstName || v.LastName) veldenTekst += "Naam: " + (v.FirstName || "") + " " + (v.LastName || "") + "\n";
-        if (phone) veldenTekst += "Telefoon: " + phone + "\n";
-        if (v.Woningwaarde) veldenTekst += "Woningwaarde: €" + Number(v.Woningwaarde).toLocaleString("nl-NL") + "\n";
-        if (v.OpenstaandeHypotheek) veldenTekst += "Openstaande hypotheek: €" + Number(v.OpenstaandeHypotheek).toLocaleString("nl-NL") + "\n";
-        if (v.IndicatiefMaandbedrag) veldenTekst += "Indicatief maandbedrag: €" + Number(v.IndicatiefMaandbedrag).toLocaleString("nl-NL") + "\n";
-        if (v.VoorschotBedrag && Number(v.VoorschotBedrag) > 0) veldenTekst += "Voorschot bedrag: €" + Number(v.VoorschotBedrag).toLocaleString("nl-NL") + "\n";
-        if (v.PartnerInwonend) veldenTekst += "Partner inwonend: " + v.PartnerInwonend + "\n";
-
-        await transporter.sendMail({
-          from: '"Consumentenzaken" <' + SMTP_USER + ">",
-          to: NOTIFY_EMAIL,
-          subject: "Nieuwe lead via Overwaarde-berekening — " + (email || "onbekend"),
-          text:
-            "Er is een nieuwe lead binnengekomen via de Overwaarde-berekening.\n\n" +
-            "E-mail: " + email + "\n" +
-            veldenTekst +
-            "\n—\nBekijk alle leads: https://emailoctopus.com",
-        });
-
-        console.log("Notificatie verzonden naar " + NOTIFY_EMAIL);
-      } catch (mailErr) {
-        console.error("Notificatie-mail mislukt:", mailErr.message);
-      }
+    const alreadyExists =
+      response.status === 409 ||
+      (data.errors || []).some((e) =>
+        (e.detail || "").toLowerCase().includes("already exists")
+      );
+    if (alreadyExists) {
+      res.status(200).json({ ok: true, note: "bestond al" });
+      return;
     }
 
-    res.status(200).json({ ok: true });
+    res.status(502).json({ error: "EmailOctopus weigerde", detail: data });
   } catch (err) {
     res.status(500).json({ error: "Serverfout", detail: String(err) });
   }
